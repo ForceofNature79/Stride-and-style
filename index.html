@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="theme-color" content="#fafaf8">
+  <meta name="description" content="STRIDE & STYLE - Premium luxury footwear crafted for the modern East African. Shop exclusive handcrafted Italian leather shoes in Nairobi, Mombasa, and Kampala.">
+  <title>STRIDE & STYLE · Luxury Footwear | Nairobi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --gold: #b8942e;
+      --gold-light: #d4af37;
+      --white: #fafaf8;
+      --off-white: #f3f0ea;
+      --cream: #e8e0d3;
+      --dark: #1a1816;
+      --charcoal: #2a2724;
+      --gray-light: #f5f3ef;
+      --gray-mid: #e0dcd5;
+      --text-dark: #1f1d1a;
+      --text-mid: #5c5852;
+      --text-light: #8a8680;
+      --border: #e5e0d8;
+      --shadow: 0 2px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .serif {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .container { padding: 0 2.5rem; }
+    }
+
+    /* loader */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: #fafaf8;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: loaderFade 0.5s ease 1.8s forwards;
+      pointer-events: none;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--gold);
+      opacity: 0;
+      animation: logoReveal 1.2s ease-out forwards;
+    }
+
+    .loader-line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0.8rem auto;
+      opacity: 0;
+      animation: lineGrow 0.8s ease 0.5s forwards;
+    }
+
+    @keyframes logoReveal {
+      0% { opacity: 0; transform: translateY(15px); letter-spacing: 10px; }
+      100% { opacity: 1; transform: translateY(0); letter-spacing: 4px; }
+    }
+
+    @keyframes lineGrow {
+      0% { opacity: 0; width: 0; }
+      100% { opacity: 1; width: 60px; }
+    }
+
+    @keyframes loaderFade {
+      0% { opacity: 1; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* header */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 250, 248, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .site-header { padding: 1rem 2.5rem; }
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--dark);
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: var(--dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: var(--dark);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #cartCount {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: var(--gold);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* mobile menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      max-width: 380px;
+      height: 100vh;
+      background: #fff;
+      z-index: 2000;
+      transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 2rem 1.5rem;
+      overflow-y: auto;
+      box-shadow: 2px 0 30px rgba(0,0,0,0.08);
+    }
+
+    .mobile-menu.active {
+      left: 0;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-close {
+      background: none;
+      border: none;
+      color: var(--text-mid);
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+    }
+
+    .mobile-nav-links li {
+      margin-bottom: 0.2rem;
+    }
+
+    .mobile-nav-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      display: block;
+      padding: 0.7rem 0;
+      transition: 0.2s;
+      border-bottom: 1px solid #f0ede8;
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--gold);
+      padding-left: 0.4rem;
+    }
+
+    .menu-section-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--text-light);
+      margin: 1.5rem 0 0.8rem;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 1500;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* hero */
+    .hero {
+      height: 100vh;
+      min-height: 600px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      background: var(--dark);
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.55);
+    }
+
+    .hero-overlay {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 5;
+      padding: 0 1.5rem;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 10vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #fff;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.4);
+      margin-bottom: 0.5rem;
+      line-height: 1.05;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-weight: 300;
+      letter-spacing: 3px;
+      margin-bottom: 2rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .btn-gold {
+      background: transparent;
+      border: 2px solid var(--gold-light);
+      color: var(--gold-light);
+      padding: 0.85rem 2.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+      color: #1a1816;
+    }
+
+    .btn-dark {
+      background: var(--dark);
+      border: 2px solid var(--dark);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-dark:hover {
+      background: transparent;
+      color: var(--dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--dark);
+      color: var(--dark);
+      padding: 0.85rem 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-outline:hover {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    /* sections */
+    .section {
+      padding: 4rem 0;
+    }
+
+    @media (min-width: 768px) {
+      .section { padding: 5rem 0; }
+    }
+
+    .section-light {
+      background: var(--gray-light);
+    }
+
+    .section-white {
+      background: #fff;
+    }
+
+    .section-dark {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-dark .section-title {
+      color: #fff;
+    }
+
+    .section-subtitle {
+      color: var(--text-mid);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .section-dark .section-subtitle {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* collection cards */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .collection-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+
+    @media (min-width: 1024px) {
+      .collection-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    }
+
+    .collection-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 2px;
+      background: #e8e4dd;
+    }
+
+    .collection-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .collection-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .collection-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+
+    .collection-card-label {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    .collection-card-count {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 1px;
+      margin-top: 0.3rem;
+    }
+
+    /* product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .product-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    }
+
+    @media (min-width: 1100px) {
+      .product-grid { grid-template-columns: repeat(4, 1fr); gap: 1.8rem; }
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #eee;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-img {
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      position: relative;
+      background: #f8f6f2;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.6s;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.06);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 0.8rem;
+      left: 0.8rem;
+      background: var(--gold);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .product-badge.new {
+      background: #1a1816;
+    }
+
+    .product-badge.limited {
+      background: #c94f3d;
+    }
+
+    .product-info {
+      padding: 1rem 0.9rem;
+    }
+
+    .product-category {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-light);
+      margin-bottom: 0.3rem;
+    }
+
+    .product-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      color: var(--text-dark);
+    }
+
+    .product-price {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-stock {
+      font-size: 0.68rem;
+      color: #8a6d3b;
+      margin-bottom: 0.6rem;
+    }
+
+    .product-stock.low {
+      color: #c94f3d;
+      font-weight: 600;
+    }
+
+    .add-btn {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      padding: 0.6rem;
+      width: 100%;
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: 0.2s;
+      border-radius: 3px;
+    }
+
+    .add-btn:hover {
+      background: var(--gold);
+    }
+
+    /* editorial */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .editorial-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    }
+
+    .editorial-img img {
+      width: 100%;
+      height: auto;
+      border-radius: 3px;
+    }
+
+    .editorial-text h3 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-text p {
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    /* info cards */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .info-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .info-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .info-card {
+      background: #fff;
+      padding: 2rem 1.5rem;
+      border-radius: 4px;
+      text-align: center;
+      border: 1px solid #eee;
+      transition: 0.3s;
+    }
+
+    .info-card:hover {
+      box-shadow: var(--shadow);
+    }
+
+    .info-card i {
+      font-size: 1.8rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .info-card h4 {
+      margin-bottom: 0.6rem;
+      font-size: 1.05rem;
+    }
+
+    .info-card p {
+      color: var(--text-mid);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* testimonials */
+    .testimonial-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .testimonial-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+
+    .stars {
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .testimonial-card p {
+      color: var(--text-mid);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      color: var(--text-dark);
+      font-weight: 600;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+    }
+
+    /* blog grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .blog-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .blog-card {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #eee;
+    }
+
+    .blog-img {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+    }
+
+    .blog-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .blog-content {
+      padding: 1.3rem;
+    }
+
+    .blog-date {
+      color: var(--gold);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-title {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-excerpt {
+      color: var(--text-mid);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* cart */
+    .cart-slide {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 450px;
+      height: 100vh;
+      background: #fff;
+      z-index: 2500;
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -4px 0 30px rgba(0,0,0,0.1);
+    }
+
+    .cart-slide.active {
+      right: 0;
+    }
+
+    .cart-inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 1.5rem;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      margin: 1rem 0;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f5f3ef;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.3rem;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid #ddd;
+      background: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background: #f5f3ef;
+    }
+
+    .qty-input {
+      width: 40px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 0.3rem;
+      font-size: 0.85rem;
+    }
+
+    .cart-total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 1rem 0;
+      border-top: 2px solid #eee;
+    }
+
+    .cart-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkout-btn {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .checkout-btn:hover {
+      background: #a07e25;
+    }
+
+    .download-btn {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .download-btn:hover {
+      background: #333;
+    }
+
+    .cart-whatsapp {
+      text-align: center;
+      margin-top: 0.4rem;
+      font-size: 0.72rem;
+      color: var(--text-light);
+    }
+
+    /* order modal */
+    .order-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.6);
+      padding: 1rem;
+    }
+
+    .order-modal.active {
+      display: flex;
+    }
+
+    .order-modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    /* footer */
+    .site-footer {
+      background: #fff;
+      padding: 3rem 0 1.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+
+    .footer-brand p {
+      color: var(--text-mid);
+      font-size: 0.85rem;
+      margin-top: 0.8rem;
+    }
+
+    .footer-col h5 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      color: var(--text-mid);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+      color: var(--text-light);
+      font-size: 0.78rem;
+    }
+
+    .insta-feed {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .insta-feed { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .insta-feed img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+
+    /* page system */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    #home-page {
+      display: block;
+    }
+
+    main {
+      margin-top: 62px;
+    }
+
+    @media (min-width: 768px) {
+      main { margin-top: 70px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">STRIDE & STYLE</div>
+      <div class="loader-line"></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="menuOverlay"></div>
+  <div class="overlay" id="cartOverlay"></div>
+
+  <!-- mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="menu-header">
+      <span style="font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:600;">MENU</span>
+      <button class="menu-close" id="menuClose"><i class="fas fa-times"></i></button>
+    </div>
+    <p class="menu-section-title">Shop</p>
+    <ul class="mobile-nav-links">
+      <li><a href="#" data-page="home">Home</a></li>
+      <li><a href="#" data-page="shop">All Footwear</a></li>
+      <li><a href="#" data-page="men">Men's Collection</a></li>
+      <li><a href="#" data-page="women">Women's Collection</a></li>
+      <li><a href="#" data-page="limited">Limited Edition</a></li>
+    </ul>
+    <p class="menu-section-title">Explore</p>
+    <ul class="mobile-nav-links">
+      <li><a href="#" data-page="blog">Editorial Journal</a></li>
+      <li><a href="#" data-page="about">Our Story & Craft</a></li>
+      <li><a href="#" data-page="sustainability">Sustainability</a></li>
+      <li><a href="#" data-page="stores">Boutiques</a></li>
+      <li><a href="#" data-page="contact">Contact & Support</a></li>
+    </ul>
+  </div>
+
+  <!-- cart -->
+  <div class="cart-slide" id="cartSlide">
+    <div class="cart-inner">
+      <div class="cart-header">
+        <span>YOUR CART (<span id="cartCountSlide">0</span>)</span>
+        <i class="fas fa-times" id="closeCart" style="cursor:pointer; color:var(--text-mid);"></i>
+      </div>
+      <div class="cart-items" id="cartItemsContainer"></div>
+      <div class="cart-total">Total: <span id="cartTotal">KES 0</span></div>
+      <div class="cart-actions">
+        <button class="checkout-btn" id="whatsappOrderBtn"><i class="fab fa-whatsapp"></i> SEND ORDER VIA WHATSAPP</button>
+        <button class="download-btn" id="downloadOrderBtn"><i class="fas fa-download"></i> DOWNLOAD BRANDED ORDER (PDF)</button>
+      </div>
+      <p class="cart-whatsapp">WhatsApp: +254 759 317 773</p>
+    </div>
+  </div>
+
+  <!-- order preview modal -->
+  <div class="order-modal" id="orderModal">
+    <div class="order-modal-content" id="orderModalContent"></div>
+  </div>
+
+  <!-- header -->
+  <header class="site-header">
+    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+    <div class="logo">STRIDE<span>&</span>STYLE</div>
+    <div class="header-right">
+      <div class="cart-icon" id="cartToggle">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="cartCount">0</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active">
+      <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-elegant-man-walking-in-the-city-at-night-34517-large.mp4" type="video/mp4">
+          <img src="https://images.pexels.com/photos/1036804/pexels-photo-1036804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" style="position:absolute; width:100%; height:100%; object-fit:cover;">
+        </video>
+        <div class="hero-overlay">
+          <p class="hero-tag">Autumn / Winter 2026</p>
+          <h1 class="hero-title">STEP INTO POWER</h1>
+          <p class="hero-sub">Luxury Beneath Every Step</p>
+          <a href="#" class="btn-gold" data-page="shop">Shop Collection</a>
+        </div>
+      </section>
+
+      <section style="background:#fff; border-bottom:1px solid #eee; padding:1.2rem 0;">
+        <div class="container">
+          <div style="display:flex; justify-content:space-around; flex-wrap:wrap; gap:1rem; text-align:center;">
+            <div><i class="fas fa-truck" style="color:var(--gold); margin-right:0.4rem;"></i><span style="font-size:0.78rem; font-weight:500;">Free Shipping Nairobi</span></div>
+            <div><i class="fas fa-undo" style="color:var(--gold); margin-right:0.4rem;"></i><span style="font-size:0.78rem; font-weight:500;">14-Day Returns</span></div>
+            <div><i class="fas fa-award" style="color:var(--gold); margin-right:0.4rem;"></i><span style="font-size:0.78rem; font-weight:500;">Italian Leather</span></div>
+            <div><i class="fas fa-shield-alt" style="color:var(--gold); margin-right:0.4rem;"></i><span style="font-size:0.78rem; font-weight:500;">1 Year Warranty</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <section class="section">
+          <div class="section-header">
+            <p class="section-tag">Curated Selections</p>
+            <h2 class="section-title">FEATURED COLLECTIONS</h2>
+            <p class="section-subtitle">Explore our meticulously crafted categories designed for every stride of your journey.</p>
+          </div>
+          <div class="collection-grid">
+            <div class="collection-card" data-page="men">
+              <img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Men's Collection">
+              <div class="collection-card-overlay">
+                <div class="collection-card-label">MEN</div>
+                <div class="collection-card-count">12 Styles · Oxfords, Derbies, Loafers</div>
+              </div>
+            </div>
+            <div class="collection-card" data-page="women">
+              <img src="https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Women's Collection">
+              <div class="collection-card-overlay">
+                <div class="collection-card-label">WOMEN</div>
+                <div class="collection-card-count">10 Styles · Heels, Pumps, Sandals</div>
+              </div>
+            </div>
+            <div class="collection-card" data-page="limited">
+              <img src="https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Limited Edition">
+              <div class="collection-card-overlay">
+                <div class="collection-card-label">LIMITED EDITION</div>
+                <div class="collection-card-count">8 Styles · Exclusive Releases</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <p class="section-tag">Just Landed</p>
+            <h2 class="section-title">NEW ARRIVALS</h2>
+            <p class="section-subtitle">The latest additions to our collection — fresh from the atelier.</p>
+          </div>
+          <div class="product-grid" id="homeProductGrid"></div>
+        </section>
+      </div>
+
+      <section class="section section-light">
+        <div class="container">
+          <div class="editorial-grid">
+            <div class="editorial-img"><img src="https://images.pexels.com/photos/1762815/pexels-photo-1762815.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Craftsmanship"></div>
+            <div class="editorial-text">
+              <p class="section-tag">Our Philosophy</p>
+              <h3>THE STRIDE STANDARD</h3>
+              <p>Every Stride & Style shoe is born from a singular vision: to create footwear that embodies both power and grace. We source full-grain Italian leather, partner with third-generation artisans, and finish every pair by hand in our Nairobi atelier.</p>
+              <a href="#" class="btn-outline" data-page="about">Discover Our Story</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <section class="section">
+          <div class="section-header">
+            <p class="section-tag">Testimonials</p>
+            <h2 class="section-title">WHAT OUR CLIENTS SAY</h2>
+          </div>
+          <div class="testimonial-grid">
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>"The Milano Oxford arrived in impeccable packaging. The leather scent alone tells you this is something special."</p>
+              <div class="testimonial-author">— Wanjiku M., Nairobi</div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>"I ordered the Kampala Sandals for a wedding in Mombasa. They arrived in 48 hours and fit like a dream."</p>
+              <div class="testimonial-author">— Aisha K., Mombasa</div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>"Limited Edition Safari Boots are a work of art. Only 50 pairs made — I got number 7."</p>
+              <div class="testimonial-author">— David O., Kampala</div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="insta-feed">
+            <img src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Instagram">
+            <img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Instagram">
+            <img src="https://images.pexels.com/photos/1476058/pexels-photo-1476058.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Instagram">
+            <img src="https://images.pexels.com/photos/298864/pexels-photo-298864.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Instagram">
+          </div>
+          <p style="text-align:center; margin-top:0.5rem; font-size:0.75rem; color:var(--text-light);">Follow us <strong>@strideandstyle</strong></p>
+        </section>
+      </div>
+    </div>
+
+    <!-- SHOP PAGE -->
+    <div id="shop-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header">
+            <p class="section-tag">Complete Collection</p>
+            <h2 class="section-title">ALL FOOTWEAR</h2>
+            <p class="section-subtitle">Browse our complete range of luxury footwear. Each pair handcrafted with Italian leather and finished in our Nairobi atelier.</p>
+          </div>
+          <div class="product-grid" id="shopProductGrid"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- MEN PAGE -->
+    <div id="men-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header">
+            <p class="section-tag">Men's Collection</p>
+            <h2 class="section-title">FOR THE MODERN GENTLEMAN</h2>
+            <p class="section-subtitle">From boardroom Oxfords to weekend loafers — footwear that commands attention without saying a word.</p>
+          </div>
+          <div class="product-grid" id="menProductGrid"></div>
+        </section>
+        <section class="section section-light" style="border-radius:8px; padding:2.5rem;">
+          <h3 style="text-align:center; margin-bottom:1rem;">The Gentleman's Guide</h3>
+          <p style="text-align:center; max-width:700px; margin:0 auto; color:var(--text-mid);">Our men's collection spans classic Oxfords, versatile Derbies, and relaxed loafers. Every pair features Goodyear welt construction.</p>
+        </section>
+      </div>
+    </div>
+
+    <!-- WOMEN PAGE -->
+    <div id="women-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header">
+            <p class="section-tag">Women's Collection</p>
+            <h2 class="section-title">ELEVATE EVERY STEP</h2>
+            <p class="section-subtitle">Sculptural heels, elegant pumps, and refined sandals — designed for the woman who moves with intention.</p>
+          </div>
+          <div class="product-grid" id="womenProductGrid"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- LIMITED PAGE -->
+    <div id="limited-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header">
+            <p class="section-tag">Exclusive</p>
+            <h2 class="section-title">LIMITED EDITION</h2>
+            <p class="section-subtitle">Rare. Numbered. Never repeated. Produced in batches of 50 or fewer.</p>
+          </div>
+          <div class="product-grid" id="limitedProductGrid"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- BLOG PAGE -->
+    <div id="blog-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header">
+            <p class="section-tag">Journal</p>
+            <h2 class="section-title">EDITORIAL</h2>
+          </div>
+          <div class="blog-grid">
+            <div class="blog-card"><div class="blog-img"><img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Leather"></div><div class="blog-content"><div class="blog-date">15 April 2026</div><h3 class="blog-title">The Art of Italian Leather</h3><p class="blog-excerpt">A deep dive into vegetable tanning in Tuscany.</p></div></div>
+            <div class="blog-card"><div class="blog-img"><img src="https://images.pexels.com/photos/3184299/pexels-photo-3184299.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Nairobi"></div><div class="blog-content"><div class="blog-date">8 April 2026</div><h3 class="blog-title">Nairobi Style Guide</h3><p class="blog-excerpt">Discover the best places to wear your Stride & Style pieces.</p></div></div>
+            <div class="blog-card"><div class="blog-img"><img src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Campaign"></div><div class="blog-content"><div class="blog-date">28 March 2026</div><h3 class="blog-title">Behind the Mombasa Campaign</h3><p class="blog-excerpt">Exclusive look at our latest cinematic shoot.</p></div></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header"><p class="section-tag">Heritage</p><h2 class="section-title">OUR STORY & CRAFT</h2></div>
+          <div class="editorial-grid">
+            <div class="editorial-img"><img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Story"></div>
+            <div><p style="line-height:1.7;">Founded in Nairobi in 2024, Stride & Style creates world-class luxury footwear reflecting the ambition of modern East Africa. Every pair begins with full-grain Italian leather, finished by hand in our Nairobi atelier.</p></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- SUSTAINABILITY PAGE -->
+    <div id="sustainability-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header"><p class="section-tag">Responsibility</p><h2 class="section-title">SUSTAINABILITY</h2></div>
+          <div class="info-grid">
+            <div class="info-card"><i class="fas fa-seedling"></i><h4>Vegetable Tanning</h4><p>Natural plant extracts — no chromium.</p></div>
+            <div class="info-card"><i class="fas fa-recycle"></i><h4>Recycled Packaging</h4><p>100% recycled materials.</p></div>
+            <div class="info-card"><i class="fas fa-shoe-prints"></i><h4>Timeless Design</h4><p>Worn for years, not seasons.</p></div>
+            <div class="info-card"><i class="fas fa-truck"></i><h4>Carbon-Neutral</h4><p>100% delivery emissions offset.</p></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- STORES PAGE -->
+    <div id="stores-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header"><p class="section-tag">Visit Us</p><h2 class="section-title">BOUTIQUES</h2></div>
+          <div class="info-grid">
+            <div class="info-card"><i class="fas fa-location-dot"></i><h4>Nairobi — Village Market</h4><p>Gigiri, Nairobi<br>Mon-Sat, 9AM-7PM</p></div>
+            <div class="info-card"><i class="fas fa-location-dot"></i><h4>Nairobi — Sarit Centre</h4><p>Westlands, Nairobi<br>Mon-Sat, 9AM-8PM</p></div>
+            <div class="info-card"><i class="fas fa-location-dot"></i><h4>Mombasa — Nyali Centre</h4><p>Nyali, Mombasa<br>Mon-Sat, 10AM-7PM</p></div>
+            <div class="info-card"><i class="fas fa-location-dot"></i><h4>Kampala — Acacia Mall</h4><p>Kisimenti, Kampala<br>Mon-Sat, 9AM-7PM</p></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact-page" class="page">
+      <div class="container">
+        <section class="section">
+          <div class="section-header"><p class="section-tag">Get In Touch</p><h2 class="section-title">CONTACT & SUPPORT</h2></div>
+          <div class="info-grid">
+            <div class="info-card"><i class="fab fa-whatsapp"></i><h4>WhatsApp</h4><p>+254 759 317 773<br>Response within 2 hours</p></div>
+            <div class="info-card"><i class="fas fa-envelope"></i><h4>Email</h4><p>concierge@strideandstyle.co.ke</p></div>
+            <div class="info-card"><i class="fas fa-phone"></i><h4>Call</h4><p>+254 700 000 000<br>Mon-Sat, 9AM-6PM</p></div>
+            <div class="info-card"><i class="fas fa-comment"></i><h4>Live Chat</h4><p>Available Mon-Sat, 9AM-9PM</p></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4 style="font-family:'Playfair Display',serif; font-size:1.2rem;">STRIDE & STYLE</h4>
+          <p>Luxury footwear crafted in Nairobi. Italian leather, artisanal construction, timeless design.</p>
+        </div>
+        <div class="footer-col"><h5>Shop</h5><ul class="footer-links"><li><a href="#" data-page="men">Men</a></li><li><a href="#" data-page="women">Women</a></li><li><a href="#" data-page="limited">Limited Edition</a></li></ul></div>
+        <div class="footer-col"><h5>About</h5><ul class="footer-links"><li><a href="#" data-page="about">Our Story</a></li><li><a href="#" data-page="stores">Stores</a></li><li><a href="#" data-page="blog">Editorial</a></li></ul></div>
+        <div class="footer-col"><h5>Support</h5><ul class="footer-links"><li><a href="#" data-page="contact">Contact</a></li><li><a href="#">Shipping</a></li><li><a href="#">FAQ</a></li></ul></div>
+      </div>
+      <div class="copyright">© 2026 STRIDE & STYLE. All rights reserved. Nairobi, Kenya. | Luxury beneath every step.</div>
+    </div>
+  </footer>
+
+  <!-- order preview modal -->
+  <div class="order-modal" id="orderPreviewModal">
+    <div class="order-modal-content" id="orderPreviewContent"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    (function(){
+      const WHATSAPP_NUMBER = "254759317773";
+      const COMPANY_NAME = "STRIDE & STYLE";
+      const COMPANY_ADDRESS = "Village Market, Gigiri, Nairobi, Kenya";
+      const COMPANY_PHONE = "+254 759 317 773";
+      const COMPANY_EMAIL = "concierge@strideandstyle.co.ke";
+
+      const products = [
+        { id: 1, name: "Milano Calf Oxford", price: 28500, category: "men", img: "https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600", stock: 4, badge: "bestseller", desc: "Classic cap-toe Oxford in polished calfskin." },
+        { id: 2, name: "Nairobi Wingtip Derby", price: 31200, category: "men", img: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 6, badge: "", desc: "Brogue-detailed derby in rich cognac leather." },
+        { id: 3, name: "Urban Runner Ivory", price: 19600, category: "men", img: "https://images.pexels.com/photos/2529147/pexels-photo-2529147.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 7, badge: "new", desc: "Minimalist sneaker in ivory full-grain leather." },
+        { id: 4, name: "Midnight Derby", price: 29800, category: "men", img: "https://images.pexels.com/photos/1909984/pexels-photo-1909984.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 5, badge: "", desc: "Sleek black derby for formal evenings." },
+        { id: 5, name: "Zanzibar Loafer", price: 25600, category: "men", img: "https://images.pexels.com/photos/267320/pexels-photo-267320.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 8, badge: "", desc: "Unlined suede loafer for effortless elegance." },
+        { id: 6, name: "Kilimanjaro Boot", price: 38700, category: "men", img: "https://images.pexels.com/photos/1476058/pexels-photo-1476058.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 3, badge: "limited", desc: "Rugged yet refined leather boot." },
+        { id: 7, name: "Nairobi Heel Boot", price: 32400, category: "women", img: "https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 2, badge: "bestseller", desc: "Sculptural heel boot in supple nappa leather." },
+        { id: 8, name: "Kampala Sandal", price: 22300, category: "women", img: "https://images.pexels.com/photos/1161294/pexels-photo-1161294.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 3, badge: "", desc: "Strappy sandal with gold-tone hardware." },
+        { id: 9, name: "Evening Pump", price: 24800, category: "women", img: "https://images.pexels.com/photos/1927259/pexels-photo-1927259.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 8, badge: "", desc: "Classic pointed-toe pump in patent leather." },
+        { id: 10, name: "Karen Slingback", price: 27800, category: "women", img: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 5, badge: "new", desc: "Elegant slingback with kitten heel." },
+        { id: 11, name: "Mombasa Wedge", price: 21500, category: "women", img: "https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 7, badge: "", desc: "Comfortable espadrille wedge." },
+        { id: 12, name: "Gold Edition Loafer", price: 41200, category: "limited", img: "https://images.pexels.com/photos/267320/pexels-photo-267320.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 1, badge: "limited", desc: "24K gold-plated hardware. Only 50 pairs." },
+        { id: 13, name: "Safari Boot", price: 38700, category: "limited", img: "https://images.pexels.com/photos/1476058/pexels-photo-1476058.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 2, badge: "limited", desc: "Hand-burnished. Numbered edition of 30." },
+        { id: 14, name: "Nyali Python Oxford", price: 58000, category: "limited", img: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 1, badge: "limited", desc: "Genuine python skin. Edition of 20." },
+        { id: 15, name: "Lamu Artisan Sandal", price: 36500, category: "limited", img: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600", stock: 3, badge: "limited", desc: "Hand-woven. Swahili craftsmanship. Edition of 40." },
+      ];
+
+      let cart = [];
+
+      function renderProductGrid(containerId, filterCategory = null) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const filtered = filterCategory ? products.filter(p => p.category === filterCategory) : products;
+        container.innerHTML = filtered.map(p => `
+          <div class="product-card">
+            <div class="product-img">
+              <img src="${p.img}" alt="${p.name}" loading="lazy">
+              ${p.badge ? `<span class="product-badge ${p.badge}">${p.badge}</span>` : ''}
+            </div>
+            <div class="product-info">
+              <div class="product-category">${p.category === 'men' ? "Men's" : p.category === 'women' ? "Women's" : "Limited Edition"}</div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-price">KES ${p.price.toLocaleString()}</div>
+              <div class="product-stock ${p.stock <= 3 ? 'low' : ''}">${p.stock <= 3 ? '⚠ Only ' + p.stock + ' left' : '✓ In stock'}</div>
+              <button class="add-btn" data-id="${p.id}">ADD TO CART</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function updateCartUI() {
+        const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+        const qty = cart.reduce((s, i) => s + i.quantity, 0);
+        document.getElementById('cartCount').textContent = qty;
+        document.getElementById('cartCountSlide').textContent = qty;
+        document.getElementById('cartTotal').textContent = `KES ${total.toLocaleString()}`;
+        
+        const container = document.getElementById('cartItemsContainer');
+        if (!cart.length) {
+          container.innerHTML = '<p style="color:var(--text-mid); text-align:center; padding:2rem;">Your cart is empty.<br><small>Add some luxury to your stride.</small></p>';
+        } else {
+          container.innerHTML = cart.map(item => `
+            <div class="cart-item">
+              <img src="${item.img}" alt="${item.name}">
+              <div style="flex:1;">
+                <div style="font-weight:600; font-size:0.9rem;">${item.name}</div>
+                <div style="font-size:0.78rem; color:var(--text-mid);">KES ${item.price.toLocaleString()}</div>
+                <div class="qty-control">
+                  <button class="qty-btn" data-action="decrease" data-id="${item.id}">−</button>
+                  <input type="number" class="qty-input" value="${item.quantity}" min="1" max="${item.stock}" data-id="${item.id}" style="width:40px;">
+                  <button class="qty-btn" data-action="increase" data-id="${item.id}">+</button>
+                </div>
+              </div>
+              <div style="font-weight:700; font-size:0.9rem;">KES ${(item.price * item.quantity).toLocaleString()}</div>
+              <i class="fas fa-trash-alt" style="cursor:pointer; color:var(--text-light);" data-remove="${item.id}"></i>
+            </div>
+          `).join('');
+
+          // Quantity change handlers
+          container.querySelectorAll('.qty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const id = parseInt(btn.dataset.id);
+              const action = btn.dataset.action;
+              const item = cart.find(i => i.id === id);
+              if (!item) return;
+              if (action === 'increase' && item.quantity < item.stock) {
+                item.quantity++;
+              } else if (action === 'decrease' && item.quantity > 1) {
+                item.quantity--;
+              }
+              updateCartUI();
+            });
+          });
+
+          container.querySelectorAll('.qty-input').forEach(input => {
+            input.addEventListener('change', () => {
+              const id = parseInt(input.dataset.id);
+              const item = cart.find(i => i.id === id);
+              if (!item) return;
+              let newQty = parseInt(input.value);
+              if (isNaN(newQty) || newQty < 1) newQty = 1;
+              if (newQty > item.stock) newQty = item.stock;
+              item.quantity = newQty;
+              updateCartUI();
+            });
+          });
+
+          container.querySelectorAll('[data-remove]').forEach(b => {
+            b.addEventListener('click', () => removeFromCart(parseInt(b.dataset.remove)));
+          });
+        }
+      }
+
+      function addToCart(id) {
+        const p = products.find(x => x.id === id);
+        if (!p) return;
+        const exist = cart.find(i => i.id === id);
+        if (exist) {
+          if (exist.quantity < p.stock) exist.quantity++;
+          else { alert('Maximum available stock reached.'); return; }
+        } else {
+          cart.push({...p, quantity: 1});
+        }
+        updateCartUI();
+        openCart();
+      }
+
+      function removeFromCart(id) {
+        cart = cart.filter(i => i.id !== id);
+        updateCartUI();
+      }
+
+      function openCart() {
+        document.getElementById('cartSlide').classList.add('active');
+        document.getElementById('cartOverlay').classList.add('active');
+      }
+
+      function closeCart() {
+        document.getElementById('cartSlide').classList.remove('active');
+        document.getElementById('cartOverlay').classList.remove('active');
+      }
+
+      function generateFullWhatsAppMessage() {
+        if (!cart.length) return '';
+        const orderNumber = 'ORD-' + Date.now().toString().slice(-8);
+        const date = new Date().toLocaleDateString('en-KE', { year: 'numeric', month: 'long', day: 'numeric' });
+        let message = `🛍️ *STRIDE & STYLE — OFFICIAL ORDER*%0A`;
+        message += `━━━━━━━━━━━━━━━━━━%0A`;
+        message += `📋 *Order #${orderNumber}*%0A`;
+        message += `📅 *Date:* ${date}%0A`;
+        message += `━━━━━━━━━━━━━━━━━━%0A%0A`;
+        message += `*ITEMS ORDERED:*%0A%0A`;
+        cart.forEach((item, i) => {
+          message += `*${i+1}. ${item.name}*%0A`;
+          message += `   • Category: ${item.category === 'men' ? "Men's" : item.category === 'women' ? "Women's" : "Limited Edition"}%0A`;
+          message += `   • Quantity: ${item.quantity} pair(s)%0A`;
+          message += `   • Unit Price: KES ${item.price.toLocaleString()}%0A`;
+          message += `   • Subtotal: KES ${(item.price * item.quantity).toLocaleString()}%0A%0A`;
+        });
+        const subtotal = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+        const delivery = subtotal > 50000 ? 0 : 1500;
+        const total = subtotal + delivery;
+        message += `━━━━━━━━━━━━━━━━━━%0A`;
+        message += `💰 *ORDER SUMMARY*%0A`;
+        message += `Subtotal: KES ${subtotal.toLocaleString()}%0A`;
+        if (delivery === 0) message += `Delivery: *FREE* (Orders over KES 50,000)%0A`;
+        else message += `Delivery: KES ${delivery.toLocaleString()}%0A`;
+        message += `%0A⭐ *TOTAL: KES ${total.toLocaleString()}*%0A`;
+        message += `━━━━━━━━━━━━━━━━━━%0A%0A`;
+        message += `📍 *Delivery Details:*%0A`;
+        message += `Name: __________________%0A`;
+        message += `Phone: __________________%0A`;
+        message += `Address: __________________%0A`;
+        message += `City: __________________%0A`;
+        message += `Size Preferences: __________________%0A%0A`;
+        message += `💳 *Payment: M-Pesa / Card on Delivery*%0A`;
+        message += `📞 *Contact: ${COMPANY_PHONE}*%0A`;
+        return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+      }
+
+      async function downloadBrandedPDF() {
+        if (!cart.length) { alert('Your cart is empty.'); return; }
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const orderNumber = 'ORD-' + Date.now().toString().slice(-8);
+        const date = new Date().toLocaleDateString('en-KE', { year: 'numeric', month: 'long', day: 'numeric' });
+        let y = 15;
+
+        // Header
+        doc.setFillColor(26, 24, 22);
+        doc.rect(0, 0, pageWidth, 35, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(18);
+        doc.setTextColor(212, 175, 55);
+        doc.text('STRIDE & STYLE', 15, 18);
+        doc.setFontSize(8);
+        doc.setTextColor(255, 255, 255);
+        doc.text('LUXURY FOOTWEAR | NAIROBI · MOMBASA · KAMPALA', 15, 24);
+        doc.text(`${COMPANY_ADDRESS} | ${COMPANY_PHONE}`, 15, 30);
+
+        y = 42;
+        // Gold line
+        doc.setDrawColor(212, 175, 55);
+        doc.setLineWidth(0.5);
+        doc.line(15, y, pageWidth - 15, y);
+        y += 8;
+
+        // Order info
+        doc.setFontSize(12);
+        doc.setTextColor(26, 24, 22);
+        doc.setFont('helvetica', 'bold');
+        doc.text('OFFICIAL ORDER DOCUMENT', 15, y);
+        y += 8;
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Order Number: ${orderNumber}`, 15, y);
+        doc.text(`Date: ${date}`, pageWidth - 60, y);
+        y += 12;
+
+        // Table header
+        doc.setFillColor(245, 243, 239);
+        doc.rect(15, y, pageWidth - 30, 8, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        doc.setTextColor(26, 24, 22);
+        doc.text('#', 17, y + 5.5);
+        doc.text('ITEM', 25, y + 5.5);
+        doc.text('CATEGORY', 90, y + 5.5);
+        doc.text('QTY', 130, y + 5.5);
+        doc.text('UNIT PRICE', 145, y + 5.5);
+        doc.text('SUBTOTAL', 170, y + 5.5);
+        y += 10;
+
+        // Items
+        doc.setFont('helvetica', 'normal');
+        cart.forEach((item, i) => {
+          if (y > 260) { doc.addPage(); y = 20; }
+          doc.setFontSize(8);
+          doc.setTextColor(26, 24, 22);
+          doc.text(`${i+1}`, 17, y);
+          doc.text(item.name, 25, y);
+          doc.text(item.category === 'men' ? "Men's" : item.category === 'women' ? "Women's" : "Limited Ed.", 90, y);
+          doc.text(`${item.quantity}`, 133, y, { align: 'center' });
+          doc.text(`KES ${item.price.toLocaleString()}`, 148, y);
+          doc.text(`KES ${(item.price * item.quantity).toLocaleString()}`, 173, y);
+          y += 7;
+        });
+
+        y += 5;
+        doc.setDrawColor(212, 175, 55);
+        doc.line(15, y, pageWidth - 15, y);
+        y += 10;
+
+        // Summary
+        const subtotal = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+        const delivery = subtotal > 50000 ? 0 : 1500;
+        const total = subtotal + delivery;
+        doc.setFontSize(9);
+        doc.text(`Subtotal:`, 130, y);
+        doc.text(`KES ${subtotal.toLocaleString()}`, 170, y);
+        y += 7;
+        doc.text(`Delivery:`, 130, y);
+        doc.text(delivery === 0 ? 'FREE' : `KES ${delivery.toLocaleString()}`, 170, y);
+        y += 7;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11);
+        doc.setTextColor(180, 148, 46);
+        doc.text(`TOTAL:`, 130, y);
+        doc.text(`KES ${total.toLocaleString()}`, 170, y);
+
+        // Footer
+        y = 275;
+        doc.setDrawColor(212, 175, 55);
+        doc.line(15, y, pageWidth - 15, y);
+        y += 6;
+        doc.setFontSize(7);
+        doc.setTextColor(140, 134, 128);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Thank you for choosing Stride & Style — Luxury Beneath Every Step.', 15, y);
+        doc.text(`WhatsApp: ${COMPANY_PHONE} | Email: ${COMPANY_EMAIL}`, 15, y + 5);
+        doc.text('This is a computer-generated order document.', pageWidth - 15, y + 5, { align: 'right' });
+
+        doc.save(`Stride&Style_Order_${orderNumber}.pdf`);
+      }
+
+      function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const pageEl = document.getElementById(pageId + '-page');
+        if (pageEl) pageEl.classList.add('active');
+        document.getElementById('mobileMenu').classList.remove('active');
+        document.getElementById('menuOverlay').classList.remove('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Initialize grids
+      renderProductGrid('homeProductGrid');
+      renderProductGrid('shopProductGrid');
+      renderProductGrid('menProductGrid', 'men');
+      renderProductGrid('womenProductGrid', 'women');
+      renderProductGrid('limitedProductGrid', 'limited');
+
+      // Event listeners
+      document.addEventListener('click', e => {
+        if (e.target.classList.contains('add-btn')) {
+          addToCart(parseInt(e.target.dataset.id));
+        }
+        const pageLink = e.target.closest('[data-page]');
+        if (pageLink) {
+          e.preventDefault();
+          showPage(pageLink.dataset.page);
+        }
+        // Collection card clicks
+        const collectionCard = e.target.closest('.collection-card');
+        if (collectionCard && collectionCard.dataset.page) {
+          e.preventDefault();
+          showPage(collectionCard.dataset.page);
+        }
+      });
+
+      document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.add('active');
+        document.getElementById('menuOverlay').classList.add('active');
+      });
+      document.getElementById('menuClose').addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.remove('active');
+        document.getElementById('menuOverlay').classList.remove('active');
+      });
+      document.getElementById('menuOverlay').addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.remove('active');
+        document.getElementById('menuOverlay').classList.remove('active');
+      });
+
+      document.getElementById('cartToggle').addEventListener('click', openCart);
+      document.getElementById('closeCart').addEventListener('click', closeCart);
+      document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+      document.getElementById('whatsappOrderBtn').addEventListener('click', () => {
+        if (!cart.length) { alert('Your cart is empty.'); return; }
+        const url = generateFullWhatsAppMessage();
+        if (url) window.open(url, '_blank');
+      });
+
+      document.getElementById('downloadOrderBtn').addEventListener('click', downloadBrandedPDF);
+
+      updateCartUI();
+    })();
+  </script>
+</body>
+</html>
